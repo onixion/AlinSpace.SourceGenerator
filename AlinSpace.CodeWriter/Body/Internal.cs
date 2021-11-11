@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace AlinSpace.CodeWriter.Body
 {
-    internal class Body : IBody
+    internal class Internal : IBody
     {
         public IList<Line.Info> Lines { get; set; }
 
         public IBody Line(Action<ILine> action)
         {
-            var proxy = new Line.Line();
+            var proxy = new Line.Internal();
             action(proxy);
             Lines.Add(proxy.Build());
 

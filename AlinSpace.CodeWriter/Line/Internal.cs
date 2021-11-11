@@ -1,6 +1,6 @@
 ﻿namespace AlinSpace.CodeWriter.Line
 {
-    internal class Line : ILine
+    internal class Internal : ILine
     {
         public string Text { get; set; }
 

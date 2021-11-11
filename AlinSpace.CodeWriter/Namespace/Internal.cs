@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AlinSpace.CodeWriter.Namespace
 {
-    internal class Namespace : INamespace
+    internal class Internal : INamespace
     {
         public string Name { get; set; }
 
@@ -11,7 +11,7 @@ namespace AlinSpace.CodeWriter.Namespace
 
         public INamespace Class(Action<IClass> action)
         {
-            var proxy = new Class.Class();
+            var proxy = new Class.Internal();
             action(proxy);
             Classes.Add(proxy.Build());
 

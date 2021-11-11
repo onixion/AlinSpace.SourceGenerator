@@ -26,14 +26,7 @@ namespace AlinSpace.CodeWriter
                 
                 foreach (var @class in @namespace.Classes)
                 {
-                    stringBuilder.Append($"{@class.AccessModifier.ToText()} class {@class.Name}{{");
-
-                    foreach (var method in @class.Methods)
-                    {
-                        stringBuilder.Append($"{method.AccessModifier.ToText()} void {method.Name}() {{}}");
-                    }
-
-                    stringBuilder.Append($"}}");
+                    stringBuilder.Append(@class);
                 }
 
                 stringBuilder.Append($"}}");

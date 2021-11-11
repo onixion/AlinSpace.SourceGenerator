@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AlinSpace.CodeWriter.Class
 {
-    internal class Class : IClass
+    internal class Internal : IClass
     {
         public string Name { get; set; }
 
@@ -11,8 +11,9 @@ namespace AlinSpace.CodeWriter.Class
 
         public bool IsStatic { get; set; }
 
-        public IList<Method.Info> Methods { get; } = new List<Method.Info>();
+        public IList<Property.Info> Properties { get; } = new List<Property.Info>();
 
+        public IList<Method.Info> Methods { get; } = new List<Method.Info>();
 
         public IClass Constructor(Action<IConstructor> action)
         {
@@ -21,7 +22,7 @@ namespace AlinSpace.CodeWriter.Class
 
         public IClass Method(Action<IMethod> action)
         {
-            var proxy = new Method.Method();
+            var proxy = new Method.Internal();
             action(proxy);
             Methods.Add(proxy.Build());
 
@@ -30,6 +31,10 @@ namespace AlinSpace.CodeWriter.Class
 
         public IClass Property(Action<IProperty> action)
         {
+            var proxy = new Property.Internal();
+            action(proxy);
+            Properties.Add(proxy.Build());
+
             return this;
         }
 

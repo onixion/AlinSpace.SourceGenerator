@@ -15,20 +15,33 @@ namespace AlinSpace.CodeWriter.Tests
                 {
                     p.ClassPublic("MyClass", p =>
                     {
+                        p.Property(p =>
+                        {
+                            p.Type = "int";
+                            p.Name = "Test";
+
+                            p.Getter(p =>
+                            {
+                                p.Body(p =>
+                                {
+                                    p.Line("return 2;");
+                                });
+                            });
+                        });
+
                         p.MethodPublic("MyMethod", p =>
                         {
                             p.Arguments(p =>
                             {
-                                p.Argument(p =>
-                                {
-                                    p.Type = "int";
-                                    p.Name = "myArgument";
-                                    p.Value = "20";
-                                });
+                                p.Argument("int myArgument = 20");
+                                p.Argument("int myArgument2 = 20");
                             });
 
                             p.Body(p =>
                             {
+                                p.Line("myArgument = 40;");
+                                p.Line("myArgument = 40;");
+                                p.Line("myArgument = 40;");
                                 p.Line("myArgument = 40;");
                             });
                         });

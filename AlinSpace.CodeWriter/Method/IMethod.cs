@@ -10,9 +10,13 @@ namespace AlinSpace.CodeWriter
 
         AccessModifier AccessModifier { get; set; }
 
+        string ReturnType { get; set; }
+
         #endregion
 
-        IAttributes Attributes(Action<IAttributes> action);
+        IMethod Attributes(Action<IAttributes> action);
+
+        IMethod Arguments(Action<IArguments> action);
 
         IMethod Body(Action<IBody> action);
     }

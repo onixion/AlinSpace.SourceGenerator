@@ -1,6 +1,6 @@
 ﻿namespace AlinSpace.CodeWriter.Using
 {
-    internal class Using : IUsing
+    internal class Internal : IUsing
     {
         public string Name { get; set; }
 

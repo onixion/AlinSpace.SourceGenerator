@@ -6,6 +6,8 @@
 
         public AccessModifier AccessModifier { get; set; }
 
+        public string ReturnType { get; set; }
+
         public Body.Info Body { get; set; }
     }
 }

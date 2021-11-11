@@ -16,7 +16,7 @@ namespace AlinSpace.CodeWriter
 
         public ICode Using(Action<IUsing> action)
         {
-            var proxy = new Using.Using();
+            var proxy = new Using.Internal();
             action(proxy);
             Usings.Add(proxy.Build());
 
@@ -25,7 +25,7 @@ namespace AlinSpace.CodeWriter
 
         public ICode Namespace(Action<INamespace> action)
         {
-            var proxy = new Namespace.Namespace();
+            var proxy = new Namespace.Internal();
             Namespaces.Add(proxy.Build());
 
             return this;

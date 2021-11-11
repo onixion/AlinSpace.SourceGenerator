@@ -2,6 +2,6 @@
 {
     public interface IArgument
     {
-        string Name { get; set; }
+        string Text { get; set; }
     }
 }

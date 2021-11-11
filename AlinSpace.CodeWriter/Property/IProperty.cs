@@ -1,7 +1,15 @@
-﻿namespace AlinSpace.CodeWriter
+﻿using System;
+
+namespace AlinSpace.CodeWriter
 {
     public interface IProperty
     {
-        public string Name { get; set; }
+        string Type { get; set; }
+
+        string Name { get; set; }
+
+        IProperty Getter(Action<IGetter> action);
+
+        IProperty Setter(Action<ISetter> action);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AlinSpace.SourceGenerator.Namespace;
+using AlinSpace.SourceGenerator.Using;
 using System.Text;
 
 namespace AlinSpace.SourceGenerator
@@ -18,7 +19,7 @@ namespace AlinSpace.SourceGenerator
 
             foreach(var @using in build.Usings)
             {
-                stringBuilder.Append($"using {@using.Name};");
+                stringBuilder.AppendInfo(@using);
             }
 
             foreach (var @namespace in build.Namespaces)

@@ -8,7 +8,7 @@ namespace AlinSpace.SourceGenerator.Attribute
             this StringBuilder stringBuilder,
             Info attribute)
         {
-            stringBuilder.Append($"[{attribute.Name}]");
+            stringBuilder.Append($"[{attribute.Text}]");
             return stringBuilder;
         }
     }

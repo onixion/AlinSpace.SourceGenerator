@@ -6,10 +6,7 @@
 
         public Info Build()
         {
-            return new Info
-            {
-                Text = Text,
-            };
+            return new Info(Text);
         }
     }
 }

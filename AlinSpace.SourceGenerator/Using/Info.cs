@@ -2,6 +2,11 @@
 {
     public class Info
     {
-        public string Name { get; set; }
+        public string Name { get; }
+
+        public Info(string name)
+        {
+            Name = name;
+        }
     }
 }

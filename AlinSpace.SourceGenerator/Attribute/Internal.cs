@@ -2,14 +2,11 @@
 {
     internal class Internal : IAttribute
     {
-        public string Name { get; set; }
+        public string Text { get; set; }
 
         public Info Build()
         {
-            return new Info
-            {
-                Name = Name,
-            };
+            return new Info(Text);
         }
     }
 }

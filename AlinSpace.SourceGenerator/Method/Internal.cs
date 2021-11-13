@@ -11,49 +11,45 @@ namespace AlinSpace.SourceGenerator.Method
 
         public string ReturnType { get; set; } = Constants.Void;
 
-        public IList<Attribute.Info> Attributes { get; } = new List<Attribute.Info>();
-
-        public IList<Argument.Info> Arguments { get; } = new List<Argument.Info>();
-
-        public Body.Info BodyInfo { get; set; }
+        private readonly IList<Attribute.Info> attributes = new List<Attribute.Info>();
 
         public IMethod Attribute(Action<IAttribute> action)
         {
             var proxy = new Attribute.Internal();
             action(proxy);
-            Attributes.Add(proxy.Build());
-
+            attributes.Add(proxy.Build());
             return this;
         }
+
+        private readonly IList<Argument.Info> arguments = new List<Argument.Info>();
 
         public IMethod Argument(Action<IArgument> action)
         {
             var proxy = new Argument.Internal();
             action(proxy);
-            Arguments.Add(proxy.Build());
-
+            arguments.Add(proxy.Build());
             return this;
         }
+
+        private Body.Info body;
 
         public IMethod Body(Action<IBody> action)
         {
             var proxy = new Body.Internal();
             action(proxy);
-            BodyInfo = proxy.Build();
-
+            body = proxy.Build();
             return this;
         }
 
         public Info Build()
         {
-            return new Info
-            {
-                Name = Name,
-                AccessModifier = AccessModifier,
-                Attributes = Attributes,
-                Arguments = Arguments,
-                Body = BodyInfo,
-            };
+            return new Info(
+                Name,
+                AccessModifier,
+                ReturnType,
+                attributes,
+                arguments,
+                body);
         }
     }
 }

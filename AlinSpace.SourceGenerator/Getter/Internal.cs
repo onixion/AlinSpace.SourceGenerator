@@ -4,23 +4,20 @@ namespace AlinSpace.SourceGenerator.Getter
 {
     internal class Internal : IGetter
     {
-        public Body.Info BodyInfo { get; set; }
+        private Body.Info body;
 
         public IGetter Body(Action<IBody> action)
         {
             var proxy = new Body.Internal();
             action(proxy);
-            BodyInfo = proxy.Build();
+            body = proxy.Build();
 
             return this;
         }
 
         public Info Build()
         {
-            return new Info
-            {
-                Body = BodyInfo,
-            };
+            return new Info(body);
         }
     }
 }

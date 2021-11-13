@@ -7,37 +7,35 @@ namespace AlinSpace.SourceGenerator.Constructor
     {
         public AccessModifier AccessModifier { get; set; }
 
-        public IList<Argument.Info> Arguments { get; } = new List<Argument.Info>();
-
-        public Body.Info BodyInfo { get; set; }
+        private readonly IList<Argument.Info> arguments = new List<Argument.Info>();
 
         public IConstructor Argument(Action<IArgument> action)
         {
             var proxy = new Argument.Internal();
             action(proxy);
-            Arguments.Add(proxy.Build());
+            arguments.Add(proxy.Build());
 
             return this;
         }
+
+        private Body.Info body;
 
         public IConstructor Body(Action<IBody> action)
         {
             var proxy = new Body.Internal();
             action(proxy);
-            BodyInfo = proxy.Build();
+            body = proxy.Build();
 
             return this;
         }
 
         public Info Build(IClass @class)
         {
-            return new Info
-            {
-                ClassName = @class.Name,
-                AccessModifier = AccessModifier,
-                Arguments = Arguments,
-                Body = BodyInfo,
-            };
+            return new Info(
+                @class.Name,
+                AccessModifier,
+                arguments,
+                body);
         }
     }
 }

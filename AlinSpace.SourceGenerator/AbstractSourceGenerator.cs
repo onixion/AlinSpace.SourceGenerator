@@ -1,8 +1,12 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
+using System.Linq;
+using System.Text;
 
 namespace AlinSpace.SourceGenerator
 {
-    public abstract class AbstractSourceGenerator : ISourceGenerator
+    [Generator]
+    public class AbstractSourceGenerator : ISourceGenerator
     {
         public virtual void Initialize(GeneratorInitializationContext context)
         {
@@ -10,11 +14,19 @@ namespace AlinSpace.SourceGenerator
 
         public void Execute(GeneratorExecutionContext context)
         {
-            var source = Source.New();
-            Execute(source);
+            var syntaxTree = context.Compilation.SyntaxTrees;
 
+            var s = new StringBuilder();   
+
+
+            foreach (var node in syntaxTree)
+            {
+                s.AppendLine(node.FilePath.ToString());
+            }
+
+            context.AddSource("helloWorldGenerator", SourceText.From(s.ToString(), Encoding.UTF8));
         }
 
-        public abstract void Execute(ISource source);
+        //public abstract void Execute(ISource source);
     }
 }

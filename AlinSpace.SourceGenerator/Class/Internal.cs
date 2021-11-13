@@ -11,61 +11,59 @@ namespace AlinSpace.SourceGenerator.Class
 
         public bool IsStatic { get; set; }
 
-        public IList<Member.Info> Members { get; } = new List<Member.Info>();
-
-        public IList<Property.Info> Properties { get; } = new List<Property.Info>();
-
-        public IList<Constructor.Info> Constructors { get; } = new List<Constructor.Info>();
-
-        public IList<Method.Info> Methods { get; } = new List<Method.Info>();
+        private readonly IList<Member.Info> members = new List<Member.Info>();
 
         public IClass Member(Action<IMember> action)
         {
             var proxy = new Member.Internal();
             action(proxy);
-            Members.Add(proxy.Build());
+            members.Add(proxy.Build());
 
             return this;
         }
+
+        private readonly IList<Property.Info> properties = new List<Property.Info>();
 
         public IClass Property(Action<IProperty> action)
         {
             var proxy = new Property.Internal();
             action(proxy);
-            Properties.Add(proxy.Build());
+            properties.Add(proxy.Build());
 
             return this;
         }
+
+        private readonly IList<Constructor.Info> constructors = new List<Constructor.Info>();
 
         public IClass Constructor(Action<IConstructor> action)
         {
             var proxy = new Constructor.Internal();
             action(proxy);
-            Constructors.Add(proxy.Build(this));
+            constructors.Add(proxy.Build(this));
 
             return this;
         }
+
+        private readonly IList<Method.Info> methods = new List<Method.Info>();
 
         public IClass Method(Action<IMethod> action)
         {
             var proxy = new Method.Internal();
             action(proxy);
-            Methods.Add(proxy.Build());
+            methods.Add(proxy.Build());
 
             return this;
         }
 
         public Info Build()
         {
-            return new Info
-            {
-                Name = Name,
-                AccessModifier = AccessModifier,
-                Members = Members,
-                Properties = Properties,
-                Constructors = Constructors,
-                Methods = Methods,
-            };
+            return new Info(
+                Name,
+                AccessModifier,
+                members,
+                properties,
+                constructors,
+                methods);
         }
     }
 }

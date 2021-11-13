@@ -1,19 +1,37 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace AlinSpace.SourceGenerator.Class
 {
     public class Info
     {
-        public string Name { get; set; }
+        public string Name { get; }
 
-        public AccessModifier AccessModifier { get; set; }
+        public AccessModifier AccessModifier { get; }
 
-        public IList<Member.Info> Members { get; set; }
+        public IReadOnlyCollection<Member.Info> Members { get; }
 
-        public IList<Property.Info> Properties { get; set; }
+        public IReadOnlyCollection<Property.Info> Properties { get; }
 
-        public IList<Constructor.Info> Constructors { get; set; }
+        public IReadOnlyCollection<Constructor.Info> Constructors { get; }
 
-        public IList<Method.Info> Methods { get; set; }
+        public IReadOnlyCollection<Method.Info> Methods { get; }
+
+        public Info(
+            string name,
+            AccessModifier accessModifier,
+            IEnumerable<Member.Info> members,
+            IEnumerable<Property.Info> properties,
+            IEnumerable<Constructor.Info> constructors,
+            IEnumerable<Method.Info> methods)
+        {
+            Name = name;
+            AccessModifier = accessModifier;
+            Members = new ReadOnlyCollection<Member.Info>(members.ToList());
+            Properties = new ReadOnlyCollection<Property.Info>(properties.ToList());
+            Constructors = new ReadOnlyCollection<Constructor.Info>(constructors.ToList());
+            Methods = new ReadOnlyCollection<Method.Info>(methods.ToList());
+        }
     }
 }

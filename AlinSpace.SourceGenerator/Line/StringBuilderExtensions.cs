@@ -8,7 +8,7 @@ namespace AlinSpace.SourceGenerator.Line
             this StringBuilder stringBuilder,
             Info line)
         {
-            stringBuilder.Append($"{line.Text}");
+            stringBuilder.Append($"{line.Text};");
             return stringBuilder;
         }
     }

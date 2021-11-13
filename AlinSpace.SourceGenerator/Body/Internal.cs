@@ -5,23 +5,20 @@ namespace AlinSpace.SourceGenerator.Body
 {
     internal class Internal : IBody
     {
-        public IList<Line.Info> Lines { get; } = new List<Line.Info>();
+        private readonly IList<Line.Info> lines = new List<Line.Info>();
 
         public IBody Line(Action<ILine> action)
         {
             var proxy = new Line.Internal();
             action(proxy);
-            Lines.Add(proxy.Build());
+            lines.Add(proxy.Build());
 
             return this;
         }
 
         public Info Build()
         {
-            return new Info
-            {
-                Lines = Lines,
-            };
+            return new Info(lines);
         }
     }
 }

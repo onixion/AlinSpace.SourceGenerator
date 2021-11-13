@@ -2,10 +2,11 @@
 {
     public class Info
     {
-        public string Type { get; set; }
+        public string Text { get; }
 
-        public string Name { get; set; }
-
-        public string DefaultValue { get; set; }
+        public Info(string text)
+        {
+            Text = text;
+        }
     }
 }

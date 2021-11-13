@@ -7,24 +7,22 @@ namespace AlinSpace.SourceGenerator.Namespace
     {
         public string Name { get; set; }
 
-        public IList<Class.Info> Classes { get; } = new List<Class.Info>();
+        private readonly IList<Class.Info> classes = new List<Class.Info>();
 
         public INamespace Class(Action<IClass> action)
         {
             var proxy = new Class.Internal();
             action(proxy);
-            Classes.Add(proxy.Build());
+            classes.Add(proxy.Build());
 
             return this;
         }
 
         public Info Build()
         {
-            return new Info()
-            {
-                Name = Name,
-                Classes = Classes,
-            };
+            return new Info(
+                Name,
+                classes);
         }
     }
 }

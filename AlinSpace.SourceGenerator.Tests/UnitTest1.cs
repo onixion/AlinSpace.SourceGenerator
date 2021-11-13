@@ -9,8 +9,6 @@ namespace AlinSpace.SourceGenerator.Tests
         {
             var build = Source
                 .New()
-                .Using("AlinSpace.Database")
-                .Using("AlinSpace.Database.Ef")
                 .Namespace("AlinSpace.Database.Generated", p =>
                 {
                     p.ClassPublic("MyClass", p =>
@@ -35,7 +33,7 @@ namespace AlinSpace.SourceGenerator.Tests
                             {
                                 p.Body(p =>
                                 {
-                                    p.Line("return 2;");
+                                    p.Line("return 2");
                                 });
                             });
                         });
@@ -46,10 +44,7 @@ namespace AlinSpace.SourceGenerator.Tests
                             p.Argument("int myArgument2 = 20");
                             p.Body(p =>
                             {
-                                p.Line("myArgument = 40;");
-                                p.Line("myArgument = 40;");
-                                p.Line("myArgument = 40;");
-                                p.Line("myArgument = 40;");
+                                p.Line("myArgument = 40");
                             });
                         });
                     });
